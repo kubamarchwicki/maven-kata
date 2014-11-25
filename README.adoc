@@ -1,0 +1,94 @@
+= Maven Kata
+
+Yes, you got it right - this is the Maven Kata project. Who, on Earth would like to do a Maven Kata. Well... let's not talk about it.
+
+The aim of this project is to provide a frame for some simple Maven related exercises.
+
+== Project structure
+
+Project is build from three independent modules:
+
+calculator-api:: provides a basic API for calculation
+calculator-test:: verification code for the calculator
+
+The assignment is to implement the calculator in a few, maven related steps (a little Java code with a lot of maven based steps).
+
+== Exercises
+
+There is no need to install maven - all the exercises can be run with https://github.com/bdemers/maven-wrapper[Maven Wrapper]. The wrapper is a batch script on Windows, and a shell script for other operating systems. When you start a Maven build via the wrapper, Maven will be automatically downloaded and used to run the build (clearly inspired by the Gradle Wrapper).
+
+=== Clone the project
+
+Clone the project into the local workspace `git clone https://github.com/kubamarchwicki/maven-kata.git`
+
+=== Install locally
+
+Install the `calculator-api` project locally with
+```
+mvnw clean install
+```
+
+=== Create new project
+
+Create new maven project with based on `maven-archetype-quickstart`
+
+```
+mvnw archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart
+```
+
+Use the following parameters:
+```
+groupId: com.example.maven.calculator
+artifactId: calculator
+version: 1.0-SNAPSHOT
+```
+
+This project can be easily imported to any IDE. In Eclipse just choose _Import... > Maven projects_ and choose _Existing Maven project_
+
+=== Adjust new project
+
+In the generated project adjust the following:
+
+* set java `source` and `target` runtime to Java 7.0
+* change the default `junit` to latest available version (4.11 as of writing this document)
+* add `calculator-api` as a dependency in the generated project
+
+.dependencies
+```
+<dependency>
+  <groupId>com.example.maven</groupId>
+  <artifactId>calculator-api</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
+.java source
+```
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.1</version>
+  <configuration>
+    <source>1.7</source>
+    <target>1.7</target>
+  </configuration>
+</plugin>
+```
+
+=== Implement the calculator
+
+And don't forget the tests!
+
+Run the project with `mvnw clean package`
+
+=== Test the reference
+
+Check with the reference `calculator-test` project if everything works fine.
+
+First build the project with skipping tests: `-DskipTest=true`
+
+Depending which calculator you've implemented test it with run a desired test. For `Double` calculator run
+
+```
+mvnw test -Dtest=DoubleCalculatorTest
+```
