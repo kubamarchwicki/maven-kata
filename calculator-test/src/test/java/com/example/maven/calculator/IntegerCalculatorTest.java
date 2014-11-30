@@ -8,9 +8,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reflections.Reflections;
 
-public class DoubleCalculatorTest {
+public class IntegerCalculatorTest {
 
-    private static Calculator<Double> calculator;
+    private static Calculator<Integer> calculator;
 
     @BeforeClass
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -20,8 +20,8 @@ public class DoubleCalculatorTest {
         for (Class<? extends Calculator> c: subTypesOf) {        	      
         	Class<?> genericType = (Class<?>) ((ParameterizedType) c.getGenericInterfaces()[0]).getActualTypeArguments()[0];
         	System.out.println(genericType.getCanonicalName());
-        	if (genericType.getCanonicalName().equals(Double.class.getCanonicalName())) {
-        		calculator = (Calculator<Double>) c.newInstance();
+        	if (genericType.getCanonicalName().equals(Integer.class.getCanonicalName())) {
+        		calculator = (Calculator<Integer>) c.newInstance();
         		return;
         	}
         }
@@ -30,27 +30,27 @@ public class DoubleCalculatorTest {
 
     @Test
     public void shouldAddTwoDoubleNumbers() {
-        assertEquals(Double.valueOf("5"),
-                calculator.sum(Double.valueOf("2"), Double.valueOf("3")));
+        assertEquals(Integer.valueOf("5"),
+                calculator.sum(Integer.valueOf("2"), Integer.valueOf("3")));
     }
     
     @Test
     public void shouldSubtractTwoDoubleNumbers() {
-        assertEquals(Double.valueOf("-1"),
-                calculator.difference(Double.valueOf("2"), Double.valueOf("3")));
+        assertEquals(Integer.valueOf("-1"),
+                calculator.difference(Integer.valueOf("2"), Integer.valueOf("3")));
     }
 
     
     @Test
     public void shouldMultiplyTwoDoubleNumbers() {
-        assertEquals(Double.valueOf("6"),
-                calculator.product(Double.valueOf("2"), Double.valueOf("3")));
+        assertEquals(Integer.valueOf("6"),
+                calculator.product(Integer.valueOf("2"), Integer.valueOf("3")));
     }
     
     @Test
     public void shouldDivideTwoDoubleNumbers() {
         assertEquals(Double.valueOf("0.666"),
-                calculator.quotient(Double.valueOf("2"), Double.valueOf("3")), 0.001d);
+                calculator.quotient(Integer.valueOf("2"), Integer.valueOf("3")), 0.001d);
     }
 
 }
