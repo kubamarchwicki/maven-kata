@@ -75,6 +75,16 @@ In the generated project adjust the following:
 </plugin>
 ```
 
+Java version can be set as `properties` as well
+
+.properties
+```
+<properties>
+  <maven.compiler.source>1.7</maven.compiler.source>
+  <maven.compiler.target>1.7</maven.compiler.target>
+</properties>
+```
+
 === Implement the calculator
 
 And don't forget the tests!
